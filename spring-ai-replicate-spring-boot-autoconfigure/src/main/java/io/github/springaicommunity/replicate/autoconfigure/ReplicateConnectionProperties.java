@@ -16,6 +16,8 @@
 
 package io.github.springaicommunity.replicate.autoconfigure;
 
+import java.time.Duration;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -31,9 +33,17 @@ public class ReplicateConnectionProperties {
 
 	public static final String DEFAULT_BASE_URL = "https://api.replicate.com/v1";
 
+	public static final int DEFAULT_RETRY_MAX_ATTEMPTS = 60;
+
+	public static final Duration DEFAULT_RETRY_FIXED_BACKOFF = Duration.ofMillis(5000);
+
 	private String apiToken;
 
 	private String baseUrl = DEFAULT_BASE_URL;
+
+	private int retryMaxAttempts = DEFAULT_RETRY_MAX_ATTEMPTS;
+
+	private Duration retryFixedBackoff = DEFAULT_RETRY_FIXED_BACKOFF;
 
 	public String getApiToken() {
 		return this.apiToken;
@@ -49,6 +59,22 @@ public class ReplicateConnectionProperties {
 
 	public void setBaseUrl(String baseUrl) {
 		this.baseUrl = baseUrl;
+	}
+
+	public int getRetryMaxAttempts() {
+		return this.retryMaxAttempts;
+	}
+
+	public void setRetryMaxAttempts(int retryMaxAttempts) {
+		this.retryMaxAttempts = retryMaxAttempts;
+	}
+
+	public Duration getRetryFixedBackoff() {
+		return this.retryFixedBackoff;
+	}
+
+	public void setRetryFixedBackoff(Duration retryFixedBackoff) {
+		this.retryFixedBackoff = retryFixedBackoff;
 	}
 
 }

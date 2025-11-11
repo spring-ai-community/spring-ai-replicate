@@ -62,7 +62,9 @@ public class ReplicateAutoconfiguration {
 
 		var builder = ReplicateApi.builder()
 			.apiKey(connectionProperties.getApiToken())
-			.baseUrl(connectionProperties.getBaseUrl());
+			.baseUrl(connectionProperties.getBaseUrl())
+			.retryMaxAttempts(connectionProperties.getRetryMaxAttempts())
+			.retryFixedBackoff(connectionProperties.getRetryFixedBackoff());
 
 		RestClient.Builder restClientBuilder = restClientBuilderProvider.getIfAvailable(RestClient::builder);
 		if (restClientBuilder != null) {

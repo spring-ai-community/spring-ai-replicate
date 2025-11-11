@@ -39,6 +39,9 @@ the Model will receive "temperature=0.7".
 # API Token to be used across all models
 spring.ai.replicate.api-token=REPLICATE_TOKEN
 
+# Configure Polling interval 
+spring.ai.replicate.retry-fixed-backoff=1000ms
+
 # Chat model
 spring.ai.replicate.chat.options.model=meta/meta-llama-3-8b-instruct
 spring.ai.replicate.chat.options.input.temperature=0.7

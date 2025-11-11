@@ -16,6 +16,7 @@
 
 package io.github.springaicommunity.replicate.api;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -64,23 +65,13 @@ public final class ReplicateApi {
 
 	private final WebClient webClient;
 
-	private final RetryTemplate retryTemplate = RetryTemplate.builder()
-		.retryOn(ReplicatePredictionNotFinishedException.class)
-		.maxAttempts(60)
-		.fixedBackoff(5000)
-		.withListener(new RetryListener() {
-			@Override
-			public <T, E extends Throwable> void onError(RetryContext context, RetryCallback<T, E> callback,
-					Throwable throwable) {
-				logger.debug("Polling Replicate Prediction: {}/10 attempts.", context.getRetryCount());
-			}
-		})
-		.build();
+	private final RetryTemplate retryTemplate;
 
 	public static final String PROVIDER_NAME = "replicate";
 
 	private ReplicateApi(String baseUrl, ApiKey apiKey, RestClient.Builder restClientBuilder,
-			WebClient.Builder webClientBuilder, ResponseErrorHandler responseErrorHandler) {
+			WebClient.Builder webClientBuilder, ResponseErrorHandler responseErrorHandler, int retryMaxAttempts,
+			Duration retryFixedBackoff) {
 		Consumer<HttpHeaders> headers = h -> {
 			h.setContentType(MediaType.APPLICATION_JSON);
 			h.setBearerAuth(apiKey.getValue());
@@ -92,6 +83,20 @@ public final class ReplicateApi {
 			.build();
 
 		this.webClient = webClientBuilder.clone().baseUrl(baseUrl).defaultHeaders(headers).build();
+
+		this.retryTemplate = RetryTemplate.builder()
+			.retryOn(ReplicatePredictionNotFinishedException.class)
+			.maxAttempts(retryMaxAttempts)
+			.fixedBackoff(retryFixedBackoff.toMillis())
+			.withListener(new RetryListener() {
+				@Override
+				public <T, E extends Throwable> void onError(RetryContext context, RetryCallback<T, E> callback,
+						Throwable throwable) {
+					logger.debug("Polling Replicate Prediction: {}/{} attempts.", context.getRetryCount(),
+							retryMaxAttempts);
+				}
+			})
+			.build();
 	}
 
 	public static Builder builder() {
@@ -359,6 +364,10 @@ public final class ReplicateApi {
 
 		private ResponseErrorHandler responseErrorHandler = RetryUtils.DEFAULT_RESPONSE_ERROR_HANDLER;
 
+		private Duration retryFixedBackoff = Duration.ofMillis(5000);
+
+		private int retryMaxAttempts = 60;
+
 		public Builder baseUrl(String baseUrl) {
 			Assert.hasText(baseUrl, "baseUrl cannot be empty");
 			this.baseUrl = baseUrl;
@@ -389,10 +398,22 @@ public final class ReplicateApi {
 			return this;
 		}
 
+		public Builder retryFixedBackoff(Duration retryFixedBackoff) {
+			Assert.notNull(retryFixedBackoff, "retryFixedBackoff cannot be null");
+			this.retryFixedBackoff = retryFixedBackoff;
+			return this;
+		}
+
+		public Builder retryMaxAttempts(int retryMaxAttempts) {
+			Assert.isTrue(retryMaxAttempts > 0, "retryMaxAttempts must be positive");
+			this.retryMaxAttempts = retryMaxAttempts;
+			return this;
+		}
+
 		public ReplicateApi build() {
 			Assert.notNull(this.apiKey, "cannot construct instance without apiKey");
 			return new ReplicateApi(this.baseUrl, this.apiKey, this.restClientBuilder, this.webClientBuilder,
-					this.responseErrorHandler);
+					this.responseErrorHandler, this.retryMaxAttempts, this.retryFixedBackoff);
 		}
 
 	}
