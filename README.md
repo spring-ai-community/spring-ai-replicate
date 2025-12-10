@@ -21,7 +21,7 @@ Add the dependency to your `pom.xml`:
 
 ```xml
 <dependency>
-    <groupId>io.github.springaicommunity</groupId>
+    <groupId>org.springaicommunity</groupId>
     <artifactId>spring-ai-replicate-spring-boot-starter</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
