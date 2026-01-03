@@ -25,7 +25,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
  * JSON objects with multiple fields.
  *
  * @author Rene Maierhofer
- * @since 1.1.0
+ * @since 1.0.0
  */
 @ConfigurationProperties(ReplicateStructuredProperties.CONFIG_PREFIX)
 public class ReplicateStructuredProperties {

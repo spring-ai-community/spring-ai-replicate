@@ -27,7 +27,7 @@ import org.springframework.lang.Nullable;
  * and we cannot automatically infer the type from the properties.
  *
  * @author Rene Maierhofer
- * @since 1.1.0
+ * @since 1.0.0
  */
 public abstract class ReplicateOptionsUtils {
 

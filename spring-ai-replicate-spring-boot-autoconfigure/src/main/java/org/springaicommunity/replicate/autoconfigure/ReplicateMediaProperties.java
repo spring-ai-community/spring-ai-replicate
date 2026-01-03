@@ -25,7 +25,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
  * models.
  *
  * @author Rene Maierhofer
- * @since 1.1.0
+ * @since 1.0.0
  */
 @ConfigurationProperties(ReplicateMediaProperties.CONFIG_PREFIX)
 public class ReplicateMediaProperties {

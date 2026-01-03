@@ -24,7 +24,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
  * Chat properties for Replicate AI.
  *
  * @author Rene Maierhofer
- * @since 1.1.0
+ * @since 1.0.0
  */
 @ConfigurationProperties(ReplicateChatProperties.CONFIG_PREFIX)
 public class ReplicateChatProperties {

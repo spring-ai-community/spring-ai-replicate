@@ -30,7 +30,7 @@ import org.springframework.ai.chat.prompt.ChatOptions;
  * models regardless of type (chat, image, audio, etc.).
  *
  * @author Rene Maierhofer
- * @since 1.1.0
+ * @since 1.0.0
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReplicateChatOptions implements ChatOptions {

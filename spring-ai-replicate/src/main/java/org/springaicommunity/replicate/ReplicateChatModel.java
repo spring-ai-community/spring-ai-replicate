@@ -48,7 +48,7 @@ import org.springframework.util.Assert;
  * Replicate Chat Model implementation.
  *
  * @author Rene Maierhofer
- * @since 1.1.0
+ * @since 1.0.0
  */
 public class ReplicateChatModel implements ChatModel {
 

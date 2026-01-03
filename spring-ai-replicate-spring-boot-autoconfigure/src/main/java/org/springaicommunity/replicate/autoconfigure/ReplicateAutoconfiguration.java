@@ -39,7 +39,7 @@ import org.springframework.web.client.RestClient;
  * {@link AutoConfiguration Auto-configuration} for Replicate models.
  *
  * @author Rene Maierhofer
- * @since 1.1.0
+ * @since 1.0.0
  */
 @AutoConfiguration(after = RestClientAutoConfiguration.class)
 @ConditionalOnClass(ReplicateApi.class)

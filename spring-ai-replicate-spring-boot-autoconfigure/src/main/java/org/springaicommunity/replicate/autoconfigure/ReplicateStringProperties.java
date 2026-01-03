@@ -25,7 +25,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
  * outputs like classifiers and filters.
  *
  * @author Rene Maierhofer
- * @since 1.1.0
+ * @since 1.0.0
  */
 @ConfigurationProperties(ReplicateStringProperties.CONFIG_PREFIX)
 public class ReplicateStringProperties {

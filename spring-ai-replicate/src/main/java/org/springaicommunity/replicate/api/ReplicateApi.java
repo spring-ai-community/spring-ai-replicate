@@ -51,7 +51,7 @@ import org.springframework.web.reactive.function.client.WebClient;
  * Client for the Replicate Predictions API
  *
  * @author Rene Maierhofer
- * @since 1.1.0
+ * @since 1.0.0
  */
 public final class ReplicateApi {
 

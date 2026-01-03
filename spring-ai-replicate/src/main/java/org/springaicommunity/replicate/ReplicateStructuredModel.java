@@ -33,7 +33,7 @@ import org.springframework.util.Assert;
  * objects.
  *
  * @author Rene Maierhofer
- * @since 1.1.0
+ * @since 1.0.0
  */
 public class ReplicateStructuredModel {
 
