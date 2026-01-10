@@ -162,36 +162,6 @@ public class ReplicateStructuredModel {
 
 	}
 
-	/**
-	 * Response containing structured output converted to a specific type.
-	 */
-	public static class TypedStructuredResponse<T> {
-
-		private final T output;
-
-		private final PredictionResponse predictionResponse;
-
-		public TypedStructuredResponse(T output, PredictionResponse predictionResponse) {
-			this.output = output;
-			this.predictionResponse = predictionResponse;
-		}
-
-		/**
-		 * Get the structured output as the specified type.
-		 */
-		public T getOutput() {
-			return this.output;
-		}
-
-		/**
-		 * Get the raw prediction response from Replicate API.
-		 */
-		public PredictionResponse getPredictionResponse() {
-			return this.predictionResponse;
-		}
-
-	}
-
 	public static final class Builder {
 
 		private ReplicateApi replicateApi;
