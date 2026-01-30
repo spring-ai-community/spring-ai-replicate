@@ -7,13 +7,19 @@
       <parent>
           <groupId>org.springaicommunity</groupId>
           <artifactId>spring-ai-replicate-parent</artifactId>
-          <version>1.0.1-SNAPSHOT</version>
+          <version>1.0.0</version>
       </parent>
 
       <artifactId>spring-ai-replicate-spring-boot-starter</artifactId>
       <packaging>jar</packaging>
       <name>Spring AI Replicate Spring Boot Starter</name>
       <description>Starter that pulls in Replicate core and autoconfigure modules.</description>
+
+    <scm>
+        <connection>scm:git:git://github.com/spring-ai-community/spring-ai-replicate.git</connection>
+        <developerConnection>scm:git:git@github.com:spring-ai-community/spring-ai-replicate.git</developerConnection>
+        <url>https://github.com/spring-ai-community/spring-ai-replicate</url>
+    </scm>
 
       <dependencies>
           <dependency>

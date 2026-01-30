@@ -19,7 +19,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.springaicommunity</groupId>
   <artifactId>spring-ai-replicate</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>Spring AI Model - Replicate</name>
   <description>Replicate AI models support</description>
   <licenses>
@@ -34,6 +34,11 @@
       <url>https://github.com/renemrhfr</url>
     </developer>
   </developers>
+  <scm>
+    <connection>scm:git:git://github.com/spring-ai-community/spring-ai-replicate.git</connection>
+    <developerConnection>scm:git:git@github.com:spring-ai-community/spring-ai-replicate.git</developerConnection>
+    <url>https://github.com/spring-ai-community/spring-ai-replicate</url>
+  </scm>
   <dependencies>
     <dependency>
       <groupId>org.springframework.ai</groupId>
