@@ -18,6 +18,7 @@ package org.springaicommunity.replicate.autoconfigure;
 
 import java.time.Duration;
 
+import org.springaicommunity.replicate.api.ReplicateApi;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -44,6 +45,8 @@ public class ReplicateConnectionProperties {
 	private int retryMaxAttempts = DEFAULT_RETRY_MAX_ATTEMPTS;
 
 	private Duration retryFixedBackoff = DEFAULT_RETRY_FIXED_BACKOFF;
+
+	private int maxInMemorySize = ReplicateApi.DEFAULT_MAX_IN_MEMORY_SIZE;
 
 	public String getApiToken() {
 		return this.apiToken;
@@ -75,6 +78,14 @@ public class ReplicateConnectionProperties {
 
 	public void setRetryFixedBackoff(Duration retryFixedBackoff) {
 		this.retryFixedBackoff = retryFixedBackoff;
+	}
+
+	public int getMaxInMemorySize() {
+		return this.maxInMemorySize;
+	}
+
+	public void setMaxInMemorySize(int maxInMemorySize) {
+		this.maxInMemorySize = maxInMemorySize;
 	}
 
 }

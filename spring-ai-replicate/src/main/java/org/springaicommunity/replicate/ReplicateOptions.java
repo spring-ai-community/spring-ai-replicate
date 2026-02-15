@@ -65,6 +65,20 @@ public class ReplicateOptions implements ModelOptions {
 	@JsonProperty("webhook_events_filter")
 	protected List<String> webhookEventsFilter;
 
+	/**
+	 * Optional wait time in seconds (1-60) for sync mode. If set, the server waits for
+	 * the prediction to complete before responding. Maps to the Prefer header.
+	 */
+	@JsonProperty("prefer_wait")
+	protected String preferWait;
+
+	/**
+	 * Optional duration after which to auto-cancel the prediction. Examples: "5m",
+	 * "1h30m", "90s". Minimum: 5 seconds. Maps to the Cancel-After header.
+	 */
+	@JsonProperty("cancel_after")
+	protected String cancelAfter;
+
 	public ReplicateOptions() {
 	}
 
@@ -74,6 +88,8 @@ public class ReplicateOptions implements ModelOptions {
 		this.input = builder.input != null ? new HashMap<>(builder.input) : new HashMap<>();
 		this.webhook = builder.webhook;
 		this.webhookEventsFilter = builder.webhookEventsFilter;
+		this.preferWait = builder.preferWait;
+		this.cancelAfter = builder.cancelAfter;
 	}
 
 	/**
@@ -105,6 +121,8 @@ public class ReplicateOptions implements ModelOptions {
 			.input(new HashMap<>(fromOptions.getInput()))
 			.webhook(fromOptions.getWebhook())
 			.webhookEventsFilter(fromOptions.getWebhookEventsFilter())
+			.preferWait(fromOptions.getPreferWait())
+			.cancelAfter(fromOptions.getCancelAfter())
 			.build();
 	}
 
@@ -148,6 +166,22 @@ public class ReplicateOptions implements ModelOptions {
 		this.webhookEventsFilter = webhookEventsFilter;
 	}
 
+	public String getPreferWait() {
+		return this.preferWait;
+	}
+
+	public void setPreferWait(String preferWait) {
+		this.preferWait = preferWait;
+	}
+
+	public String getCancelAfter() {
+		return this.cancelAfter;
+	}
+
+	public void setCancelAfter(String cancelAfter) {
+		this.cancelAfter = cancelAfter;
+	}
+
 	public static class Builder {
 
 		protected String model;
@@ -159,6 +193,10 @@ public class ReplicateOptions implements ModelOptions {
 		protected String webhook;
 
 		protected List<String> webhookEventsFilter;
+
+		protected String preferWait;
+
+		protected String cancelAfter;
 
 		protected Builder() {
 		}
@@ -195,6 +233,16 @@ public class ReplicateOptions implements ModelOptions {
 
 		public Builder webhookEventsFilter(List<String> webhookEventsFilter) {
 			this.webhookEventsFilter = webhookEventsFilter;
+			return this;
+		}
+
+		public Builder preferWait(String preferWait) {
+			this.preferWait = preferWait;
+			return this;
+		}
+
+		public Builder cancelAfter(String cancelAfter) {
+			this.cancelAfter = cancelAfter;
 			return this;
 		}
 

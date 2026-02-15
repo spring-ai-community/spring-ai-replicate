@@ -55,16 +55,19 @@ public class ReplicateStringModel {
 	 */
 	public StringResponse generate(ReplicateOptions options) {
 		ReplicateOptions mergedOptions = mergeOptions(options);
-		Assert.hasText(mergedOptions.getModel(), "model name must not be empty");
+		boolean hasModel = mergedOptions.getModel() != null && !mergedOptions.getModel().isEmpty();
+		boolean hasVersion = mergedOptions.getVersion() != null && !mergedOptions.getVersion().isEmpty();
+		Assert.isTrue(hasModel || hasVersion, "Either model name or version must be specified");
 
 		PredictionRequest request = new PredictionRequest(mergedOptions.getVersion(), mergedOptions.getInput(),
-				mergedOptions.getWebhook(), mergedOptions.getWebhookEventsFilter(), false);
+				mergedOptions.getWebhook(), mergedOptions.getWebhookEventsFilter(), null);
 
-		PredictionResponse predictionResponse = this.replicateApi.createPredictionAndWait(mergedOptions.getModel(),
-				request);
+		PredictionResponse predictionResponse = this.replicateApi.createPredictionAndWait(
+				hasModel ? mergedOptions.getModel() : null,
+				request, mergedOptions.getPreferWait(), mergedOptions.getCancelAfter());
 
 		if (predictionResponse == null) {
-			logger.warn("No prediction response returned for model: {}", mergedOptions.getModel());
+			logger.warn("No prediction response returned for model: {}", hasModel ? mergedOptions.getModel() : mergedOptions.getVersion());
 			return new StringResponse(null, predictionResponse);
 		}
 
@@ -97,6 +100,12 @@ public class ReplicateStringModel {
 		}
 		if (providedOptions.getWebhookEventsFilter() != null) {
 			merged.setWebhookEventsFilter(providedOptions.getWebhookEventsFilter());
+		}
+		if (providedOptions.getPreferWait() != null) {
+			merged.setPreferWait(providedOptions.getPreferWait());
+		}
+		if (providedOptions.getCancelAfter() != null) {
+			merged.setCancelAfter(providedOptions.getCancelAfter());
 		}
 		Map<String, Object> mergedInput = new HashMap<>();
 		if (this.defaultOptions.getInput() != null) {

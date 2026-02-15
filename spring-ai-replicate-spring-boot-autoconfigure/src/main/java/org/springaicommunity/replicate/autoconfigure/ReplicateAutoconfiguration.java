@@ -64,7 +64,8 @@ public class ReplicateAutoconfiguration {
 			.apiKey(connectionProperties.getApiToken())
 			.baseUrl(connectionProperties.getBaseUrl())
 			.retryMaxAttempts(connectionProperties.getRetryMaxAttempts())
-			.retryFixedBackoff(connectionProperties.getRetryFixedBackoff());
+			.retryFixedBackoff(connectionProperties.getRetryFixedBackoff())
+			.maxInMemorySize(connectionProperties.getMaxInMemorySize());
 
 		RestClient.Builder restClientBuilder = restClientBuilderProvider.getIfAvailable(RestClient::builder);
 		if (restClientBuilder != null) {

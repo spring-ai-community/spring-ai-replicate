@@ -42,7 +42,7 @@ class ReplicateMediaModelIT {
 		ReplicateOptions options = ReplicateOptions.builder()
 			.model("black-forest-labs/flux-schnell")
 			.withParameter("prompt", "a cat sitting on a laptop")
-			.withParameter("num_outputs", 2)
+			.withParameter("num_outputs", 2).preferWait("wait")
 			.build();
 
 		MediaResponse response = this.mediaModel.generate(options);
@@ -62,12 +62,12 @@ class ReplicateMediaModelIT {
 
 	@Test
 	void testGenerateWithDefaultOptions() {
-		ReplicateOptions options = ReplicateOptions.builder().withParameter("prompt", "a serene lake").build();
+		ReplicateOptions options = ReplicateOptions.builder().withParameter("prompt", "a serene lake").preferWait("wait").build();
 
 		MediaResponse response = this.mediaModel.generate(options);
 
 		assertThat(response).isNotNull();
-		assertThat(response.getUris()).isNotEmpty();
+		assertThat(response.getFirstUri()).isNotNull();
 	}
 
 }

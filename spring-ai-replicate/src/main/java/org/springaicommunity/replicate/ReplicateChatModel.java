@@ -100,7 +100,8 @@ public class ReplicateChatModel implements ChatModel {
 					this.observationRegistry)
 			.observe(() -> {
 				ReplicateApi.PredictionResponse predictionResponse = this.replicateApi
-					.createPredictionAndWait(requestOptions.getModel(), request);
+					.createPredictionAndWait(requestOptions.getModel(), request, requestOptions.getPreferWait(),
+							requestOptions.getCancelAfter());
 
 				if (predictionResponse == null) {
 					logger.warn("No prediction response returned for prompt: {}", prompt);
@@ -210,6 +211,12 @@ public class ReplicateChatModel implements ChatModel {
 		}
 		if (promptOptions.getWebhookEventsFilter() != null) {
 			merged.setWebhookEventsFilter(promptOptions.getWebhookEventsFilter());
+		}
+		if (promptOptions.getPreferWait() != null) {
+			merged.setPreferWait(promptOptions.getPreferWait());
+		}
+		if (promptOptions.getCancelAfter() != null) {
+			merged.setCancelAfter(promptOptions.getCancelAfter());
 		}
 		Map<String, Object> mergedInput = new HashMap<>();
 		if (this.defaultOptions.getInput() != null) {

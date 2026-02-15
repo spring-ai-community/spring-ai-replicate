@@ -33,7 +33,7 @@ public class ReplicateMediaProperties {
 	public static final String CONFIG_PREFIX = "spring.ai.replicate.media";
 
 	@NestedConfigurationProperty
-	private ReplicateOptions options = ReplicateOptions.builder().build();
+	private ReplicateOptions options = ReplicateOptions.builder().preferWait("wait").build();
 
 	public ReplicateOptions getOptions() {
 		return this.options;
