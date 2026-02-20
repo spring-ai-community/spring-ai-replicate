@@ -23,7 +23,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>org.springaicommunity</groupId>
     <artifactId>spring-ai-replicate-spring-boot-starter</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -229,8 +229,6 @@ public void generateEmbeddings() {
 
 ### Multi-turn Conversations
 The current implementation does **not support multi-turn conversations** with conversation history. Each call is independent.
-This is due to the fact that not all models support this, those who do have different schemas and it would be rather difficult to
-maintain a list of the correct mappings.
 
 ### Model Discovery
 Visit [Replicate.com](https://replicate.com/explore) to discover available models. Each model has different input parameters - check the model's documentation on Replicate for specific parameter requirements.
