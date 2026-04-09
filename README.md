@@ -1,5 +1,7 @@
 # Spring AI Replicate Integration
 
+📖 **[Documentation](https://springaicommunity.mintlify.app/projects/incubating/spring-ai-replicate)**
+
 This project provides Spring AI integration for [Replicate.com](https://replicate.com), enabling access to hundreds of AI models for text generation, image/video/audio generation, embeddings, classification, and more.
 
 ## Overview
